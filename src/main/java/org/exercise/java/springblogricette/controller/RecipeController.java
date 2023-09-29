@@ -40,4 +40,11 @@ public class RecipeController {
         }
 
     }
+
+
+    @GetMapping("/create")
+    private String create(Model model) {
+        model.addAttribute("recipeObj", new Recipe());
+        return "recipes/form";
+    }
 }
