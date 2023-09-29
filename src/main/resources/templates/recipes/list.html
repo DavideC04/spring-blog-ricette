@@ -14,15 +14,17 @@
     <h1>Recipes List</h1>
     <hr>
     <!-- link di aggiunta ricette -->
+    <a th:href="@{/recipes/create}" class="btn btn-primary mb-3">Aggiungi Ricetta</a>
     <!-- tabella che mostra le ricette -->
     <div class="row">
-        <div th:each="r : ${recipeAttribute}" class="col-md-4">
+        <div th:each="r : ${recipeAttribute}" class="col-md-3">
             <div class="card mb-2" style="width: 18rem;">
                 <img th:src="${r.photoURL}" alt="Immagine Ricetta">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${r.title}"></h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><b>Ingredienti:</b> <span th:text="${r.ingredients}"></span>
+                        <li class="list-group-item"><b>Preparazione:</b> <span
+                                th:text="${r.recipeText}"></span>
                         </li>
                         <li class="list-group-item"><b>Porzioni:</b> <span th:text="${r.portions}"></span></li>
                         <li class="list-group-item"><b>Tempo di cottura: </b> <span
@@ -32,6 +34,7 @@
                     <div class="card-body">
                         <a th:href="@{/recipes/show/{recipeId}(recipeId=${r.id})}"
                            class="btn btn-primary">Dettagli</a>
+                        <a th:href="@{/recipes/edit/{id}(id=${r.id})}" class="btn btn-primary mx-4">Modifica</a>
                     </div>
                 </div>
             </div>

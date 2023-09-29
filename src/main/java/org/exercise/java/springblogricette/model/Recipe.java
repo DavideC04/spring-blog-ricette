@@ -9,11 +9,16 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String title;
     private String photoURL;
+
     private Integer preparationTime;
+
     private String ingredients;
+
     private Integer portions;
+
     private String recipeText;
 
     // GETTER E SETTER

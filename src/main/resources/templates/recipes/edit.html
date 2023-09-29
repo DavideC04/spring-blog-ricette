@@ -7,19 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>Create Recipe</title>
+    <title>Edit Recipe</title>
 </head>
 <body>
 <div class="container">
-    <h1>Create Recipe</h1>
+    <h1>Edit Recipe</h1>
     <hr>
-    <!-- form di creazione ricetta -->
+    <!-- Form da modificare -->
     <form
-            id="recipe-form"
-            th:action="@{/recipes/create}"
-            th:object="${recipeObj}"
+            id="recipe-edit"
+            th:action="@{/recipes/edit/{id}(id=${recipe.id})}"
+            th:object="${recipe}"
             method="post"
     >
+        <!-- immagine url -->
         <div class="mb-3">
             <label for="img" class="form-label">Immagine</label>
             <input type="url" class="form-control" id="img" th:field="*{photoURL}" th:errorClass="is-invalid">
@@ -29,7 +30,7 @@
                 </ul>
             </div>
         </div>
-
+        <!-- nome piatto -->
         <div class="mb-3">
             <label for="title" class="form-label">Nome Piatto</label>
             <input type="text" class="form-control" id="title" th:field="*{title}" th:errorClass="is-invalid">
@@ -39,7 +40,7 @@
                 </ul>
             </div>
         </div>
-
+        <!-- ingredienti -->
         <div class="mb-3">
             <label for="ingredients" class="form-label">Ingredienti</label>
             <input type="text" class="form-control" id="ingredients" th:field="*{ingredients}"
@@ -50,6 +51,7 @@
                 </ul>
             </div>
         </div>
+        <!-- porzioni -->
         <div class="mb-3">
             <label for="portions" class="form-label">Porzioni</label>
             <input type="number" class="form-control" id="portions" th:field="*{portions}"
@@ -60,6 +62,7 @@
                 </ul>
             </div>
         </div>
+        <!-- tempo di cottura -->
         <div class="mb-3">
             <label for="prepTime" class="form-label">Tempo di cottura</label>
             <input type="number" class="form-control" id="prepTime" th:field="*{preparationTime}"
@@ -70,6 +73,7 @@
                 </ul>
             </div>
         </div>
+        <!-- preparazione -->
         <div class="mb-3">
             <label for="preparation" class="form-label">Preparazione</label>
             <input type="text" class="form-control" id="preparation" th:field="*{recipeText}"
@@ -80,7 +84,7 @@
                 </ul>
             </div>
         </div>
-
+        <!-- pulsanti salvataggio e cancellazione -->
         <div>
             <button type="submit" class="btn btn-primary">Save</button>
             <a th:href="@{/recipes}" class="btn btn-primary">Cancel</a>
