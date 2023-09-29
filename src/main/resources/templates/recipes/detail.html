@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>Recipe detail</title>
+    <title>Dettagli Ricetta</title>
 </head>
 <body>
 <div class="container">
-    <h1>Recipe Detail</h1>
+    <h1>Dettagli Ricetta</h1>
     <hr>
 
     <!-- lista descrittiva delle ricette -->
@@ -26,6 +26,12 @@
         <dd th:text="${recipe.portions}"></dd>
         <dt>Preparazione</dt>
         <dd th:text="${recipe.recipeText}"></dd>
+        <dt>Categorie</dt>
+        <dd>
+            <ul>
+                <li th:each="c : ${recipe.categories}" th:text="${c.name}"></li>
+            </ul>
+        </dd>
     </dl>
 
     <!-- bottone per tornare alla lista di ricette -->

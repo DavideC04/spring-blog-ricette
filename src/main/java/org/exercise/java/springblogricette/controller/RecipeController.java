@@ -2,6 +2,7 @@ package org.exercise.java.springblogricette.controller;
 
 import jakarta.validation.Valid;
 import org.exercise.java.springblogricette.model.Recipe;
+import org.exercise.java.springblogricette.repository.CategoryRepository;
 import org.exercise.java.springblogricette.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,8 @@ public class RecipeController {
 
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping
     public String index(Model model) {
@@ -34,6 +37,7 @@ public class RecipeController {
         if (recipeOptional.isPresent()) {
             Recipe recipeDb = recipeOptional.get();
             model.addAttribute("recipe", recipeDb);
+            model.addAttribute("categories", recipeDb.getCategories());
             return "recipes/detail";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -44,6 +48,7 @@ public class RecipeController {
 
     @GetMapping("/create")
     public String create(Model model) {
+        model.addAttribute("categoryList", categoryRepository.findAll());
         model.addAttribute("recipeObj", new Recipe());
         return "recipes/form";
     }
@@ -64,6 +69,7 @@ public class RecipeController {
         Optional<Recipe> result = recipeRepository.findById(id);
         if (result.isPresent()) {
             model.addAttribute("recipe", result.get());
+            model.addAttribute("categoryList", categoryRepository.findAll());
             return "recipes/edit";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ricetta con id: " + id + " non trovato");
@@ -75,6 +81,7 @@ public class RecipeController {
     @PostMapping("/edit/{id}")
     public String doEdit(@PathVariable("id") Integer id, @Valid @ModelAttribute("recipe") Recipe recipeForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("categoryList", categoryRepository.findAll());
             return "recipes/edit";
         }
         recipeRepository.save(recipeForm);

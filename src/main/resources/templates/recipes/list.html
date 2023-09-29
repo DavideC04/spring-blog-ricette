@@ -7,14 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>Recipes list</title>
+    <title>Lista Ricette</title>
 </head>
 <body>
 <div class="container">
-    <h1>Recipes List</h1>
+    <h1>Lista Ricette</h1>
     <hr>
-    <!-- link di aggiunta ricette -->
-    <a th:href="@{/recipes/create}" class="btn btn-primary mb-3">Aggiungi Ricetta</a>
+    <!-- link di aggiunta ricette e lista delle categorie -->
+    <div class="d-flex align-items-center mb-3">
+        <a th:href="@{/recipes/create}" class="btn btn-primary">Aggiungi Ricetta</a>
+        <a th:href="@{/categories}" class="btn btn-primary mx-3">Lista Categorie</a>
+    </div>
     <!-- tabella che mostra le ricette -->
     <div class="row">
         <div th:each="r : ${recipeAttribute}" class="col-md-3">

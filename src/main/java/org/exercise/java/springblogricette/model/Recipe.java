@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+
 @Entity
 @Table(name = "recipes")
 public class Recipe {
@@ -32,6 +34,9 @@ public class Recipe {
     @NotBlank(message = "Questa sezione non deve essere vuota")
     @Column(length = 500)
     private String recipeText;
+
+    @OneToMany
+    private List<Category> categories;
 
     // GETTER E SETTER
 
@@ -92,6 +97,13 @@ public class Recipe {
         this.recipeText = recipeText;
     }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 
     // metodo per la stringa limitata nella card
     public String getLimitedString() {
