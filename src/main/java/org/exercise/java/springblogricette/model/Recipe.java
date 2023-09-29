@@ -1,6 +1,9 @@
 package org.exercise.java.springblogricette.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "recipes")
@@ -10,15 +13,24 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "Questa sezione non deve essere vuota")
     private String title;
+    @NotBlank(message = "Questa sezione non deve essere vuota")
     private String photoURL;
 
+    @NotNull(message = "Questa sezione non deve essere vuota")
+    @Min(1)
     private Integer preparationTime;
 
+    @NotBlank(message = "Questa sezione non deve essere vuota")
     private String ingredients;
 
+    @NotNull(message = "Questa sezione non deve essere vuota")
+    @Min(1)
     private Integer portions;
 
+    @NotBlank(message = "Questa sezione non deve essere vuota")
+    @Column(length = 500)
     private String recipeText;
 
     // GETTER E SETTER
@@ -79,4 +91,16 @@ public class Recipe {
     public void setRecipeText(String recipeText) {
         this.recipeText = recipeText;
     }
+
+
+    // metodo per la stringa limitata nella card
+    public String getLimitedString() {
+        if (recipeText.length() > 100) {
+            return recipeText.substring(0, 100) + "...";
+        } else {
+            return recipeText;
+        }
+    }
 }
+
+

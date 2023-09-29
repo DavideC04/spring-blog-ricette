@@ -22,7 +22,8 @@
     >
         <div class="mb-3">
             <label for="img" class="form-label">Immagine</label>
-            <input type="url" class="form-control" id="img" th:field="*{photoURL}" th:errorClass="is-invalid">
+            <input type="url" class="form-control" id="img" th:field="*{photoURL}"
+                   th:errorClass="is-invalid">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('photoURL')}">
                 <ul>
                     <li th:each="err : ${#fields.errors('photoURL')}" th:text="${err}"></li>
